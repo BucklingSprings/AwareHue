@@ -15,6 +15,8 @@ After the install, the configuration UI will show up automatically. This might t
 
 To configure: Click on the refresh button next to the list of bridges, change the password, select the bridge you want and connect to it by pressing the link button on the bridge and then the connect button in the UI. All your Hue lights should now be listed in the available lights list. Select the light you would like to use as your Aware notification light. Clicking on the Test Light button should switch the selected light to flashing blue.
 
+Close the window and in a minute or so Aware should sync up the selected light with your activity.
+
 
 #License
 The code is licensed under a 3-clause BSD license.
