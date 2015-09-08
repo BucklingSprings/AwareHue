@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AwareAddOn enabled="true">
+	<Program><![CDATA[ AwareHue.exe ]]> </Program>
+	<WorkingDirectory></WorkingDirectory>
+	<Arguments> <![CDATA[ --more-or-less {MORE_OR_LESS}  ]]>  </Arguments>
+</AwareAddOn>

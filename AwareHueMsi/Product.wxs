@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix 
+	xmlns="http://schemas.microsoft.com/wix/2006/wi"
+	xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+	<Product Id="*" Name="AwareHue" Language="1033" Version="1.0.0.0" Manufacturer="Buckling Springs LLC" UpgradeCode="A3B54D8C-B2E3-4695-AFEE-C6A9F3D5AD09">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perUser" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+		<Feature Id="ProductFeature" Title="Aware Hue" Level="1">
+			<ComponentGroupRef Id="AwareHueFiles" />
+			<ComponentGroupRef Id="AwareHueAddOnConfig" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="LocalAppDataFolder">
+				<Directory Id="INSTALLFOLDER" Name="AwareHue" />
+				<Directory Id="ADDONFOLDER" Name="AwareAddOns" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="AwareHueFiles" Directory="INSTALLFOLDER">
+
+			<Component Id="AwareHueExecutable" Guid="*">
+				<File Name="$(var.AwareHue.TargetFileName)" Source="$(var.AwareHue.TargetPath)"  KeyPath="yes"/>
+			</Component>
+
+
+			<Component Id="AwareHueExeConfig" Guid="*">
+				<File Name="AwareHue.exe.config" Source="$(var.AwareHue.TargetDir)AwareHue.exe.config"  KeyPath="yes"/>
+			</Component>
+
+			<!-- Dependencies -->
+
+			<Component Id="FSharpCoreAssembly" Guid="*">
+				<File Name="FSharp.Core.dll" Source="$(var.AwareHue.TargetDir)FSharp.Core.dll"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="UnionArgParserAssembly" Guid="*">
+				<File Name="UnionArgParser.dll" Source="$(var.AwareHue.TargetDir)UnionArgParser.dll"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="NewtonsoftJsonAssembly" Guid="*">
+				<File Name="Newtonsoft.Json.dll" Source="$(var.AwareHue.TargetDir)Newtonsoft.Json.dll"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="Q42HueApiAssembly" Guid="*">
+				<File Name="Q42.HueApi.dll" Source="$(var.AwareHue.TargetDir)Q42.HueApi.dll"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="Q42HueApiNETAssembly" Guid="*">
+				<File Name="Q42.HueApi.NET.dll" Source="$(var.AwareHue.TargetDir)Q42.HueApi.NET.dll"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="SystemNetHttpExtensionsAssembly" Guid="*">
+				<File Name="System.Net.Http.Extensions.dll" Source="$(var.AwareHue.TargetDir)System.Net.Http.Extensions.dll"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="SystemNetHttpPrimitivesAssembly" Guid="*">
+				<File Name="System.Net.Http.Primitives.dll" Source="$(var.AwareHue.TargetDir)System.Net.Http.Primitives.dll"  KeyPath="yes"/>
+			</Component>
+
+
+
+
+		</ComponentGroup>
+
+		<ComponentGroup Id="AwareHueAddOnConfig" Directory="ADDONFOLDER">
+			<Component Id="AwareHueConfig" Guid="*">
+				<File Id="AwareHueConfigFile" Name="AwareHue.mbroadcast.xml" Source="$(var.AwareHue.TargetDir)AwareHue.mbroadcast.xml"  KeyPath="yes" />
+
+				<util:XmlFile Id="SetWorkingDirectory"
+						Action="setValue"
+						ElementPath="/AwareAddOn/WorkingDirectory"
+						Value="[INSTALLFOLDER]"
+						File="[ADDONFOLDER]AwareHue.mbroadcast.xml"
+						SelectionLanguage="XPath"
+						Sequence="1"/>
+			</Component>
+		</ComponentGroup>
+		
+		
+	</Fragment>
+</Wix>
