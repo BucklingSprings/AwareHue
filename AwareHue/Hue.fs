@@ -12,7 +12,8 @@ module HueConfigurationStore =
         Registry.GetValue(key, valueName, System.String.Empty) :?> string
 
     let storeS (valueName : string) (value : string)  =
-        Registry.SetValue(key, valueName, value, RegistryValueKind.String)
+        if (value <> Unchecked.defaultof<_>) then
+            Registry.SetValue(key, valueName, value, RegistryValueKind.String)
 
     let getStoredOrDefault (valueName : string) (defaultValue : string) =
         let nm = getS valueName
