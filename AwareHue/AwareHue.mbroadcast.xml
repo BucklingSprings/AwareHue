@@ -2,5 +2,5 @@
 <AwareAddOn enabled="true">
 	<Program><![CDATA[ AwareHue.exe ]]> </Program>
 	<WorkingDirectory></WorkingDirectory>
-	<Arguments> <![CDATA[ --more-or-less {MORE_OR_LESS}  ]]>  </Arguments>
+	<Arguments> <![CDATA[ --more-or-less {MORE_OR_LESS} --goal-likely {GOAL_LIKELY} --goal-words {GOAL_WORDS}  ]]>  </Arguments>
 </AwareAddOn>
